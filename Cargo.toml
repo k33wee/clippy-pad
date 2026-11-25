@@ -1,13 +1,33 @@
 [package]
 name = "cosmic-bluetooth-gamepad"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
+rust-version = "1.93"
+description = "Bluetooth game controller applet for the COSMIC desktop"
+license = "GPL-3.0-or-later"
 
 [dependencies]
-futures-util = "0.3.31"
+futures-util = "0.3"
 i18n-embed = { version = "0.16", features = ["fluent-system", "desktop-requester"] }
 i18n-embed-fl = "0.10"
-libcosmic = { git = "https://github.com/pop-os/libcosmic.git", features = ["applet", "applet-token", "dbus-config", "multi-window", "tokio", "wayland", "winit"] }
-rust-embed = "8.7.2"
-tokio = { version = "1.48.0", features = ["full"] }
-zbus = { version = "5.13.2", default-features = false, features = ["tokio"] }
+rust-embed = "8"
+tokio = { version = "1", features = ["time"] }
+zbus = { version = "5.19", default-features = false, features = ["tokio"] }
+
+[dependencies.libcosmic]
+git = "https://github.com/pop-os/libcosmic.git"
+rev = "009fb9d4138f25615122c4ccc42d025472da9cdd"
+default-features = false
+features = [
+    # COSMIC applet support. This pulls in the Wayland/winit/tokio pieces needed by applets.
+    "applet",
+    "applet-token",
+    "a11y",
+]
+
+[profile.release]
+lto = "thin"
+strip = true
+
+[profile.dev]
+debug = 0

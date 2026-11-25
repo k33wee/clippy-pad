@@ -1,14 +1,13 @@
 [Desktop Entry]
 Name=Cosmic Bluetooth Gamepad
-Comment=Bluetooth controller manager
+Comment=Bluetooth controller manager for COSMIC
 Type=Application
 Icon=cosmic-bluetooth-gamepad
-Exec=cosmic-bluetooth-gamepad %F
+Exec=cosmic-bluetooth-gamepad
 Terminal=false
 StartupNotify=true
-Categories=COSMIC;
-Keywords=COSMIC;
+Categories=Utility;X-Cosmic;X-Iced;
+Keywords=COSMIC;Bluetooth;Controller;Gamepad;
 NoDisplay=true
 X-CosmicApplet=true
 X-CosmicHoverPopup=Auto
-MimeType=

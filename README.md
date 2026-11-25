@@ -38,14 +38,17 @@ cargo build --release
 ## Build/Install with just
 
 ```bash
-# build
-just build
+# build, lint, and test
+just check
 
-# install for current user
-just install
+# install system-wide (like the other k33wee applets)
+sudo just install
 
 # uninstall
-just uninstall
+sudo just uninstall
+
+# open the popup as a regular window, for trying it out
+just run
 ```
 
 ## Usage
@@ -57,6 +60,6 @@ If you have previously paired controllers via system Bluetooth settings and then
 1. Open the applet menu
 2. Find the controller in the paired list
 3. Click the "Reconnect"
-4. The applet will remove the device from system Bluetooth settings start a 60 second countdown
-5. During the countdown, make the controller discoverable (on ps4/ps5 controllers, hold the Share button + PS button until the light bar starts flashing)
+4. The applet removes the device from the system Bluetooth settings and starts a 60 second countdown
+5. During the countdown, make the controller discoverable (on PS4/PS5 controllers, hold the Share button + PS button until the light bar starts flashing)
 6. The applet will find, pair, trust and connect the controller automatically
