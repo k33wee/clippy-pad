@@ -21,7 +21,7 @@ test:
 run:
     cargo run --locked -- --standalone
 
-install:
+install: build
     install -Dm755 target/release/{{name}} {{prefix}}/bin/{{name}}
     install -Dm644 resources/{{appid}}.desktop {{prefix}}/share/applications/{{appid}}.desktop
     install -Dm644 resources/app.metainfo.xml {{prefix}}/share/metainfo/{{appid}}.metainfo.xml
