@@ -24,7 +24,7 @@ run:
 install:
     install -Dm755 target/release/{{name}} {{prefix}}/bin/{{name}}
     install -Dm644 resources/{{appid}}.desktop {{prefix}}/share/applications/{{appid}}.desktop
-    install -Dm644 resources/app.metainfo.xml {{prefix}}/share/metainfo/{{appid}}.metainfo.xml
+    install -Dm644 resources/{{appid}}.metainfo.xml {{prefix}}/share/metainfo/{{appid}}.metainfo.xml
     install -Dm644 resources/icon.svg {{prefix}}/share/icons/hicolor/scalable/apps/{{appid}}.svg
     install -Dm644 LICENSE {{prefix}}/share/licenses/{{appid}}/LICENSE
     -update-desktop-database {{prefix}}/share/applications
