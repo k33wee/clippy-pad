@@ -1,4 +1,4 @@
-app-title = Cosmic Bluetooth Gamepad
+app-title = Clippy Pad
 about = About
 about-text = Manage Bluetooth game controllers: connect, disconnect, rename, and re-pair them without leaving the panel.
 version = Version

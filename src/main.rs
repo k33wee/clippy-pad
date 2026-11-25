@@ -11,8 +11,8 @@ fn main() -> cosmic::iced::Result {
             "--standalone" => standalone = true,
             "--help" | "-h" => {
                 println!(
-                    "Cosmic Bluetooth Gamepad - controller manager for COSMIC\n\n\
-                     Usage: cosmic-bluetooth-gamepad [--standalone]\n\n\
+                    "Clippy Pad - Bluetooth controller manager for COSMIC\n\n\
+                     Usage: cosmic-applet-clippy-pad [--standalone]\n\n\
                      Add the applet in COSMIC Settings -> Desktop -> Panel -> Applets.\n\
                      Without a panel host, a regular window opens instead."
                 );

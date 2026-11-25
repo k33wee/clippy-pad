@@ -913,8 +913,8 @@ dependencies = [
 ]
 
 [[package]]
-name = "cosmic-bluetooth-gamepad"
-version = "0.2.0"
+name = "cosmic-applet-clippy-pad"
+version = "0.3.0"
 dependencies = [
  "futures-util",
  "i18n-embed",

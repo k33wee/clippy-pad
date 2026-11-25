@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=Cosmic Bluetooth Gamepad
+Name=Clippy Pad
 Comment=Bluetooth controller manager for COSMIC
 Type=Application
-Icon=cosmic-bluetooth-gamepad
-Exec=cosmic-bluetooth-gamepad
+Icon=cosmic-applet-clippy-pad
+Exec=cosmic-applet-clippy-pad
 Terminal=false
 StartupNotify=true
 Categories=Utility;X-Cosmic;X-Iced;

@@ -89,7 +89,7 @@ impl Application for Applet {
     /// `standalone` is the application flag: a normal window, rather than a panel applet.
     type Flags = bool;
     type Message = Message;
-    const APP_ID: &'static str = "com.keewee.CosmicBluetoothGamepad";
+    const APP_ID: &'static str = "io.github.k33wee.clippy-pad";
 
     fn core(&self) -> &cosmic::Core {
         &self.core

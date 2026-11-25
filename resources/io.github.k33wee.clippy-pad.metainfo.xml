@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
-  <id>com.keewee.CosmicBluetoothGamepad</id>
+  <id>io.github.k33wee.clippy-pad</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
-  <name>Cosmic Bluetooth Gamepad</name>
+  <name>Clippy Pad</name>
   <summary>Bluetooth controller manager for COSMIC</summary>
-  <icon type="stock">cosmic-bluetooth-gamepad</icon>
-  <launchable type="desktop-id">com.keewee.CosmicBluetoothGamepad.desktop</launchable>
+  <icon type="stock">cosmic-applet-clippy-pad</icon>
+  <launchable type="desktop-id">io.github.k33wee.clippy-pad.desktop</launchable>
   <provides>
-    <id>com.keewee.CosmicBluetoothGamepad</id>
+    <id>io.github.k33wee.clippy-pad</id>
     <binaries>
-      <binary>cosmic-bluetooth-gamepad</binary>
+      <binary>cosmic-applet-clippy-pad</binary>
     </binaries>
   </provides>
   <requires>
@@ -29,5 +29,7 @@
     <keyword>Bluetooth</keyword>
     <keyword>Controller</keyword>
   </keywords>
+  <url type="homepage">https://github.com/k33wee/clippy-pad</url>
+  <url type="bugtracker">https://github.com/k33wee/clippy-pad/issues</url>
   <content_rating type="oars-1.1"/>
 </component>

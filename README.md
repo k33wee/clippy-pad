@@ -1,65 +1,100 @@
-# cosmic-bluetooth-gamepad
+# clippy-pad
 
-COSMIC panel applet for managing Bluetooth game controllers.
+![GitHub License](https://img.shields.io/github/license/k33wee/clippy-pad)
+![GitHub Repo stars](https://img.shields.io/github/stars/k33wee/clippy-pad)
 
-![Screenshot](resources/example.png)
+COSMIC panel applet for Bluetooth game controllers.
 
-Some controllers (e.g. PlayStation DualSense) does not automatically reconnect after being connected to a different device. This applet aims to solve that by allowing users to easily connect/disconnect controllers and auto-reconnect to previously paired controllers by their MAC address.
+See what is connected, disconnect, rename, remove, and re-pair a controller without leaving the panel. Some controllers (PlayStation DualSense and DualShock in particular) do not reconnect on their own after being used with another device; Clippy Pad re-pairs them by their address.
 
-Main features:
-
-- Connect/disconnect Bluetooth game controllers
-- View battery level of connected controllers
-- Auto-reconnect to previously paired controllers (This will remove the controller from the system Bluetooth settings, find, pair, trust and connect it automatically when in range)
-- Rename paired controllers
-
-## Dependencies
-
-- BlueZ + DBus (system Bluetooth stack)
-- Build dependencies for libcosmic on Debian-based systems:
-  - cargo
-  - cmake
-  - just
-  - pkg-config
-  - libxkbcommon-dev
-  - libwayland-dev
-  - libgl1-mesa-dev
-  - libssl-dev
-  - libexpat1-dev
-  - libfontconfig-dev
-  - libfreetype-dev
-
-## Build
-
-```bash
-cargo build --release
-```
-
-## Build/Install with just
-
-```bash
-# build, lint, and test
-just check
-
-# install system-wide (like the other k33wee applets)
-sudo just install
-
-# uninstall
-sudo just uninstall
-
-# open the popup as a regular window, for trying it out
-just run
-```
+<img src="./resources/screenshots/home.png" alt="Clippy Pad popup with connected devices and a paired devices list with rename, reconnect, and remove buttons" width="360">
 
 ## Usage
 
-Open **COSMIC Settings → Desktop → Panel → Applets** and add “Cosmic Bluetooth Gamepad” to your panel.
+Open **COSMIC Settings → Desktop → Panel → Applets** and add "Clippy Pad" to your panel.
+You might need to log out and back in to see the applet in the list of available applets.
 
-If you have previously paired controllers via system Bluetooth settings and then reconnect the device:
+Click the panel icon to open the device list. It refreshes every 10 seconds while open; **Refresh** reloads it at once.
 
-1. Open the applet menu
-2. Find the controller in the paired list
-3. Click the "Reconnect"
-4. The applet removes the device from the system Bluetooth settings and starts a 60 second countdown
-5. During the countdown, make the controller discoverable (on PS4/PS5 controllers, hold the Share button + PS button until the light bar starts flashing)
-6. The applet will find, pair, trust and connect the controller automatically
+- **Connected devices** shows each controller with its address and battery charge (when the kernel reports one), and a **Disconnect** button.
+- **Paired devices** lists everything the system remembers, with three actions per row: **Rename**, **Reconnect**, and **Remove**.
+- The info button opens About; **Esc** closes the popup or cancels a rename.
+
+## Guides
+
+<details>
+<summary>Reconnecting a controller</summary>
+
+**Reconnect** is for a controller that is already paired but will not connect again on its own:
+
+1. Press **Reconnect** on its row. The applet removes the controller from the system's Bluetooth settings and starts a 60 second search; the row shows the countdown.
+2. Put the controller in pairing mode (on PS4 and PS5 controllers, hold **Share** and **PS** together until the light bar flashes).
+3. Clippy Pad finds it, pairs, trusts, and connects it, and restores its name.
+
+If nothing is found in time, the popup says so. The controller has already been removed from the system's Bluetooth settings by then, so pair it again from **COSMIC Settings → Bluetooth** (or put it in pairing mode and press **Reconnect** again once it shows up in discovery).
+
+</details>
+
+<details>
+<summary>Features</summary>
+
+- Connected controllers with battery level, and one-tap disconnect
+- Paired controllers: rename, remove, and re-pair by address
+- Reconnect countdown shown in the row, with the controller's name kept while the system has already forgotten it
+- Buttons stay quiet while a request is running, so a device is never asked twice at once
+- Dismissable error card when BlueZ refuses something
+- About page with version and license; English strings, ready for translations (Fluent)
+
+</details>
+
+<details>
+<summary>Install with just</summary>
+
+Requires BlueZ and the libcosmic build dependencies:
+
+```bash
+sudo apt install bluez build-essential cargo cmake just pkgconf libxkbcommon-dev libwayland-dev \
+  libssl-dev libexpat1-dev libfontconfig-dev libfreetype-dev
+```
+
+```bash
+# format check, clippy, and tests
+just check
+
+# build the release binary
+just build
+
+# install system-wide under /usr (restart the panel to see it)
+sudo just install
+sudo just uninstall
+```
+
+For development, `just run` opens the popup as a regular window (`--standalone`).
+
+If you had the earlier **Cosmic Bluetooth Gamepad** installed under `~/.local`, remove `~/.local/bin/cosmic-bluetooth-gamepad` and `~/.local/share/applications/com.keewee.CosmicBluetoothGamepad.desktop` first: a user-local desktop file overrides the system one.
+
+</details>
+
+<details>
+<summary>Run the tests</summary>
+
+```bash
+just test
+```
+
+</details>
+
+<details>
+<summary>Technical notes</summary>
+
+- App ID: `io.github.k33wee.clippy-pad`
+- Everything talks to BlueZ over the system bus (`org.bluez`): device lists come from the ObjectManager, actions are `Device1` method calls and properties
+- Battery levels are read from `/sys/class/power_supply`, which only some drivers expose (PlayStation controllers do)
+- Reconnect = `RemoveDevice`, then discovery by address for up to 60 seconds, then `Pair`, `Trusted`, `Connect`, and the old alias
+- Built on [libcosmic](https://github.com/pop-os/libcosmic)
+
+</details>
+
+## Attribution
+
+- "COSMIC" is a desktop environment by System76.
