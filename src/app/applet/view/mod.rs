@@ -16,6 +16,7 @@ pub(super) fn popup(app: &Applet) -> Element<'_, Message> {
         .height(Length::Fill);
     if app.page == Page::Devices {
         content = content.push(header());
+    }
     let body = match app.page {
         Page::Devices => devices::page(app),
         Page::About => about::page(),
